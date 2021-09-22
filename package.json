@@ -1,6 +1,6 @@
 {
   "name": "@aaronxyliu/ftfixer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "git-push": "git add . && git commit -m \"regular update\" && git push origin",
