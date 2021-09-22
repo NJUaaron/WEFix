@@ -1,0 +1,5 @@
+{
+    "-h, --help                 ": "display this help and exit",
+    "-v, --version              ": "display version and exit",
+    "<file.js>                  ": "auto fix javascript test file"
+}

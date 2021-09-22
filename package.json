@@ -1,11 +1,9 @@
 {
-  "name": "ftfixer",
+  "name": "@aaronxyliu/ftfixer",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "git-commit": "git add . && git commit -m 'regular update'",
-    "git-push": "git push origin",
+    "git-push": "git add . && git commit -m 'regular update' && git push origin",
     "deploy": "npm version patch && npm publish"
   },
   "keywords": [],
@@ -13,5 +11,20 @@
   "license": "ISC",
   "dependencies": {
     "babel": "^6.23.0"
+  },
+  "devDependencies": {
+    "minify": "^7.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NJUaaron/UI-Flaky-Test-Fixer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NJUaaron/UI-Flaky-Test-Fixer/issues"
+  },
+  "homepage": "https://github.com/NJUaaron/UI-Flaky-Test-Fixer#readme",
+  "description": "",
+  "bin": {
+    "ftfixer": "bin/ftfixer.js"
   }
 }
