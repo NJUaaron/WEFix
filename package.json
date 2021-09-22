@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "git-push": "git add . && git commit -m 'regular update' && git push origin",
+    "git-push": "git add . && git commit -m \"regular update\" && git push origin",
     "deploy": "npm version patch && npm publish"
   },
-  "keywords": [],
+  "keywords": [
+    "flaky test",
+    "e2e test",
+    "UI-based test",
+    "selenium",
+    "auto fix"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -23,8 +29,14 @@
     "url": "https://github.com/NJUaaron/UI-Flaky-Test-Fixer/issues"
   },
   "homepage": "https://github.com/NJUaaron/UI-Flaky-Test-Fixer#readme",
-  "description": "",
+  "description": "Auto code fixer for UI-based flaky test",
   "bin": {
     "ftfixer": "bin/ftfixer.js"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
