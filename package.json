@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "main": "index.js",
   "scripts": {
+    "test": "node ./bin/ftfixer.js ./test/hello.js",
     "git-push": "git add . && git commit -m \"regular update\" && git push origin",
     "deploy": "npm version patch && npm publish"
   },
@@ -16,7 +17,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel": "^6.23.0"
+    "@babel/core": "^7.15.5",
+    "@babel/traverse": "^7.15.4"
   },
   "devDependencies": {
     "minify": "^7.1.0"
