@@ -1,0 +1,17 @@
+{
+  "name": "ftfixer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "git-commit": "git add . && git commit -m 'regular update'",
+    "git-push": "git push origin",
+    "deploy": "npm version patch && npm publish"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.23.0"
+  }
+}
