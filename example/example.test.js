@@ -1,4 +1,3 @@
-const a =2;
 const {Builder, By, Key} = require('selenium-webdriver');
 
 test('e2e test', async () => {
