@@ -1,6 +1,4 @@
-const {Builder, By, Key, until} = require('selenium-webdriver');
-const AutoTest = require('./autoTest.js')
-
+const {Builder, By, Key} = require('selenium-webdriver');
 
 async function main(){
      const driver = await new Builder()

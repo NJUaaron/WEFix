@@ -1,6 +1,5 @@
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const {Builder, By, Key} = require('selenium-webdriver');
 const FTFixer = require('@aaronxyliu/ftfixer');                        // INSTRUMENT
-
 
 async function main(){
      const driver = await new Builder()

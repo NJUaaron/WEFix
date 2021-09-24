@@ -1,4 +1,4 @@
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const {Builder, By, Key} = require('selenium-webdriver');
 
 async function main(){
      const driver = await new Builder()
