@@ -1,16 +1,5 @@
-const parser = require("@babel/parser");
-const traverse = require("@babel/traverse");
+const {execSync} = require("child_process");
 
-const code = `function square(n) {
-  return n * n;
-}`;
+var stdout = execSync("node test/hello.js");
 
-const ast = parser.parse(code);
-
-traverse(ast, {
-  enter(path) {
-    if (path.isIdentifier({ name: "n" })) {
-      path.node.name = "x";
-    }
-  },
-});
+console.log(stdout.toString());
