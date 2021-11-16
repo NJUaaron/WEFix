@@ -1,9 +1,9 @@
 const fs = require('fs');
 
-var FTTest = {}
+var FTFixer = {}
 
 
-FTTest.waitFor = async function (timeout = 2000) {
+FTFixer.waitFor = async function (timeout = 2000) {
     return new Promise(r => {
         setTimeout(() => {
             r();
@@ -11,7 +11,7 @@ FTTest.waitFor = async function (timeout = 2000) {
     });
 }
 
-FTTest.waitUntil = async function (conFunc, timeout = 2000, interval = 10) {    // conFunc: condition function(async)
+FTFixer.waitUntil = async function (conFunc, timeout = 2000, interval = 10) {    // conFunc: condition function(async)
     var timeoutFlag = false;
     setTimeout(() => timeoutFlag = true, timeout);
 
@@ -27,7 +27,7 @@ FTTest.waitUntil = async function (conFunc, timeout = 2000, interval = 10) {    
     return false;
 }
 
-FTTest.parseCookie = function (cookies) {
+FTFixer.parseCookie = function (cookies) {
     var mutations = []; //mutation array
 
     for (let i in cookies) {
@@ -48,8 +48,8 @@ FTTest.parseCookie = function (cookies) {
 
 }
 
-FTTest.before_cmd = async function (driver) {
-    var snippet_path = __dirname + '/lib/mutationObserver.min.js'
+FTFixer.before_cmd = async function (driver) {
+    var snippet_path = __dirname + '/lib/mutationObserver.js'
     var snippet = '';
     try {
         snippet = fs.readFileSync(snippet_path, 'utf8');
@@ -62,8 +62,8 @@ FTTest.before_cmd = async function (driver) {
     await driver.manage().deleteAllCookies();
 }
 
-FTTest.after_cmd = async function (driver, filename, start_line, start_col) {
-    await FTTest.waitFor(2000);
+FTFixer.after_cmd = async function (driver, filename, start_line, start_col) {
+    await FTFixer.waitFor(2000);
     var cookies = await driver.manage().getCookies();
     var mutations = FTFixer.parseCookie(cookies);
     var timestamp = Date.now();
@@ -83,4 +83,4 @@ FTTest.after_cmd = async function (driver, filename, start_line, start_col) {
 
 
 
-module.exports = FTTest;
+module.exports = FTFixer;
