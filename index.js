@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 var FTTest = {}
 
 
@@ -46,8 +48,39 @@ FTTest.parseCookie = function (cookies) {
 
 }
 
-// start mutation observer code snippet
-// Minified mutationObserver.js
-FTTest.START_MO_SNIPPET = `function cookieSet(e){if("undefined"==typeof document)return;var t=(new Date).getTime(),o=JSON.stringify(e),r=new Date(Date.now()+8e3).toUTCString();cookieStr="ftFix"+t+"="+o+"; expires="+r,document.cookie=cookieStr}function StartObserver(){console.log("Start mutaion oberver");new MutationObserver((function(e,t){var o=[];for(let t in e){const r=e[t];let d=convertRecord(r);o.push(d),"childList"===r.type?console.log("A child node has been added or removed."):"attributes"===r.type?console.log("The "+r.attributeName+" attribute was modified."):"characterData"===r.type&&console.log("Character data was modified.")}cookieSet(o)})).observe(document,{attributes:!0,childList:!0,subtree:!0}),console.log("Mutation observer started")}function convertRecord(e){var t={};t.target=convertNode(e.target),t.addedNodes=[];var o=e.addedNodes;for(let e=0;e<o.length;e++)t.addedNodes.push(convertNode(o[e]));t.removedNodes=[];var r=e.removedNodes;for(let e=0;e<r.length;e++)t.removedNodes.push(convertNode(r[e]));return t.type=e.type,t.attributeName=e.attributeName,t.oldValue=e.oldValue,t}function convertNode(e){var t={};return t.nodeName=e.nodeName,t.className=e.className,t.id=e.id,t.childElementCount=e.childElementCount,t}StartObserver();`
+FTTest.before_cmd = async function (driver) {
+    var snippet_path = __dirname + '/lib/mutationObserver.min.js'
+    var snippet = '';
+    try {
+        snippet = fs.readFileSync(snippet_path, 'utf8');
+    }
+    catch (err) {
+        console.error('Unable to open mutationObserver file at: ' + snippet_path);
+        return;
+    }
+    await driver.executeScript(snippet);
+    await driver.manage().deleteAllCookies();
+}
+
+FTTest.after_cmd = async function (driver, filename, start_line, start_col) {
+    await FTTest.waitFor(2000);
+    var cookies = await driver.manage().getCookies();
+    var mutations = FTFixer.parseCookie(cookies);
+    var timestamp = Date.now();
+    var record = {
+        "time": timestamp,
+        "filename": filename,
+        "start_line": start_line,
+        "start_col": start_col,
+        "mutations": mutations
+    };
+    // Append to log file
+    fs.appendFile(__dirname + '/.mutationslog', JSON.stringify(record) + '\r\n', function(err){
+        if(err)
+            console.error('save to log file fails.');
+    })
+}
+
+
 
 module.exports = FTTest;

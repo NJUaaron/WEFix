@@ -37,5 +37,10 @@ $ npm run git-push
 $ npm run deploy
 ```
 
+How to test?
+``` shell
+node .\bin\ftfixer.js -h
+```
+
 How to contact the author?  
 Please email to `xliu234@buffalo.edu`

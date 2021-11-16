@@ -1,5 +1,8 @@
-const {execSync} = require("child_process");
+const fs = require('fs');
 
-var stdout = execSync("node test/hello.js");
+if(typeof a == 'undefined')
+    console.log('un');
+else
+console.log('de');
 
-console.log(stdout.toString());
+window.a = true;
