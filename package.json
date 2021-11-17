@@ -17,8 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.15.5",
-    "@babel/traverse": "^7.15.4"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "minify": "^7.1.0",
