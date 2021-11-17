@@ -44,3 +44,5 @@ node .\bin\ftfixer.js -h
 
 How to contact the author?  
 Please email to `xliu234@buffalo.edu`
+
+All the mutation record will be saved in `.mutationslog` file, located in root directory.
