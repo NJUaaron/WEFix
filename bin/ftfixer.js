@@ -5,7 +5,7 @@ const Pack = require('../package');
 const Fixer = require('../lib/fixer');
 const {Instrument_single_file, Instrument_folder} = require('../lib/instrumenter');
 const {Recover_folder, Recover_single_file} = require('../lib/recover');
-const {start_panel_server} = require('../lib/panel_server');
+const {start_panel_server} = require('../lib/GUI/panel_server');
 const Version = Pack.version;
 
 const Argv = process.argv;
@@ -25,7 +25,7 @@ async function ftfixer() {
     if (/^(-v|--version)$/.test(params[0]))
         return log('v' + Version);
     
-    if (/^(-p|--panel)$/.test(params[0]))
+    if (/^(-p|--panel|ui)$/.test(params[0]))
         return start_panel_server();
     
     // code instrument for file or folder
