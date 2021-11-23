@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
+const fs = require('fs');
 const Pack = require('../package');
 const Fixer = require('../lib/fixer');
 const {Instrument_single_file, Instrument_folder} = require('../lib/instrumenter');
@@ -50,7 +51,12 @@ function instrument(filepath) {
         filepath = '.';      // default as root directory
     if (/(.js)$/.test(filepath)) {
         // single file
-        Instrument_single_file(filepath);
+        if (fs.existsSync(filepath + '.ftbackup')) {
+            //file exists
+            console.log(filepath + 'was already instrumented. Skip.')
+        }
+        else
+            Instrument_single_file(filepath);
     }
     else {
         // handle all js files in the the folder

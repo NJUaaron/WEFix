@@ -62,7 +62,7 @@ FTFixer.before_cmd = async function (driver) {
     await driver.manage().deleteAllCookies();
 }
 
-FTFixer.after_cmd = async function (driver, filename, start_line, start_col) {
+FTFixer.after_cmd = async function (driver, filename, start_line, start_col, sentence) {
     await FTFixer.waitFor(2000);
     var cookies = await driver.manage().getCookies();
     var mutations = FTFixer.parseCookie(cookies);
@@ -72,6 +72,7 @@ FTFixer.after_cmd = async function (driver, filename, start_line, start_col) {
         "filename": filename,
         "start_line": start_line,
         "start_col": start_col,
+        "sentence": sentence,
         "mutations": mutations
     };
     // Append to log file
