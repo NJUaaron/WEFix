@@ -33,6 +33,9 @@ FTFixer.parseCookie = function (cookies) {
     for (let i in cookies) {
         // Replace %22 and %2C
         //cookieStr = cookies[i].value.split("%22").join("\"").split("%2C").join(",");
+        if (cookies[i].name.slice(0, 5) != 'ftFix')
+            continue;
+
         let cookieStr = cookies[i].value
 
         let mlist = JSON.parse(cookieStr);
