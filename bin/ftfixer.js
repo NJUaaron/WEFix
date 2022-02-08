@@ -26,8 +26,10 @@ async function ftfixer() {
     if (/^(-v|--version)$/.test(params[0]))
         return log('v' + Version);
     
-    if (/^(-p|--panel|ui)$/.test(params[0]))
+    if (/^(-p|--panel|ui)$/.test(params[0])) {
+        CleanMutationData();
         return start_panel_server();
+    }
     
     // code instrument for file or folder
     if (/^(-i|--instrument)$/.test(params[0]))
@@ -91,6 +93,56 @@ function help() {
     for (const name of Object.keys(bin)) {
         console.log('  %s %s', name, bin[name]);
     }
+}
+
+function CleanMutationData() {
+    // Read mutations from local log file
+    const logfile_path = __dirname + '/../.mutationslog';
+    var content = '';
+    try {
+        content = fs.readFileSync(logfile_path, 'utf8');
+    }
+    catch (err) {
+        console.error('Unable to open mutation log file to read during clean process');
+        return;
+    }
+    var records = content.split('\r\n');
+    var newContent = '';
+
+    for (let record_s of records) {
+        if (record_s) {
+            let record = JSON.parse(record_s)
+            let mutations = record.mutations;
+            var lastMutation_s = ''
+            let i = mutations.length;
+            while (i > 0) {
+                i --;
+                let mutation = mutations[i];
+                let target = mutation.target;
+                let Mutation_s = JSON.stringify(mutation);
+
+                if (target && (target.nodeName == 'HEAD' || target.nodeName == 'BODY')) {
+                    mutations.splice(i, 1); //remove this element
+                }
+                else if (Mutation_s == lastMutation_s) {
+                    mutations.splice(i, 1); //remove this repeat element
+                }
+                else {
+                    lastMutation_s = Mutation_s;
+                }
+                
+            }
+            newContent += JSON.stringify(record) + '\r\n';
+        }
+    }
+
+    try {
+        fs.writeFileSync(logfile_path, newContent);
+    }
+    catch (err) {
+        console.error('Unable to open mutation log file to write during clean process');
+        return;
+    } 
 }
 
 ftfixer();

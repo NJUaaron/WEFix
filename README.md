@@ -15,8 +15,11 @@ $ npm update @aaronxyliu/ftfixer
 
 how to use?
 ``` shell
-# fix example.js file, generate example.fix.js
-$ npm <example.js>
+# help manual
+$ npx @aaronxyliu/ftfixer --help
+
+# open ui panel to show mutation record
+$ npx @aaronxyliu/ftfixer ui
 ```
 
 

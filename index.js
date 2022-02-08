@@ -76,10 +76,11 @@ FTFixer.before_cmd_cy = async function (cy) {
 }
 
 FTFixer.after_cmd = async function (driver, filename, start_line, start_col, sentence) {
+    var timestamp = Date.now(); //miliseconds
     await FTFixer.waitFor(2000);
     var cookies = await driver.manage().getCookies();
     var mutations = FTFixer.parseCookie(cookies);
-    var timestamp = Date.now();
+    
     var record = {
         "time": timestamp,
         "filename": filename,
@@ -96,10 +97,10 @@ FTFixer.after_cmd = async function (driver, filename, start_line, start_col, sen
 }
 
 FTFixer.after_cmd_cy = async function (cy, filename, start_line, start_col, sentence) {
+    var timestamp = Date.now();
     cy.wait(2000);
     cy.getCookies().then((cookies) => {
-        var mutations = FTFixer.parseCookie(cookies);
-        var timestamp = Date.now();
+        var mutations = FTFixer.parseCookie(cookies);     
         var record = {
             "time": timestamp,
             "filename": filename,
