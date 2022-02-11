@@ -27,7 +27,6 @@ async function ftfixer() {
         return log('v' + Version);
     
     if (/^(-p|--panel|ui)$/.test(params[0])) {
-        CleanMutationData();
         return start_panel_server();
     }
     

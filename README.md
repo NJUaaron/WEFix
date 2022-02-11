@@ -42,7 +42,8 @@ $ npm run deploy
 
 How to test?
 ``` shell
-node .\bin\ftfixer.js -h
+$ node bin/ftfixer.js ui
+$ npx nodemon bin/ftfixer.js ui
 ```
 
 How to contact the author?  
