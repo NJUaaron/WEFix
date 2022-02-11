@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { MUTATIONS_LOG_PATH } = require('./lib/global')
 
 var FTFixer = {}
 
@@ -89,7 +90,7 @@ FTFixer.after_cmd = async function (driver, filename, start_line, start_col, sen
         "mutations": mutations
     };
     // Append to log file
-    fs.appendFile(__dirname + '/.mutationslog', JSON.stringify(record) + '\r\n', function(err){
+    fs.appendFile(MUTATIONS_LOG_PATH, JSON.stringify(record) + '\r\n', function(err){
         if(err)
             console.error('save to log file fails.');
     })
@@ -109,9 +110,8 @@ FTFixer.after_cmd_cy = async function (cy, filename, start_line, start_col, sent
             "mutations": mutations
         };
         // Append to log file
-        var log_path = __dirname + '/.mutationslog'
-        cy.readFile(log_path).then((str) => {
-            cy.writeFile(log_path, str + JSON.stringify(record) + '\r\n')
+        cy.readFile(MUTATIONS_LOG_PATH).then((str) => {
+            cy.writeFile(MUTATIONS_LOG_PATH, str + JSON.stringify(record) + '\r\n')
         })
         
         cy.log(record)

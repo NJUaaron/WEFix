@@ -42,11 +42,11 @@ $ npm run deploy
 
 How to test?
 ``` shell
-$ node bin/ftfixer.js ui
+$ node bin/ftfixer.js --help
 $ npx nodemon bin/ftfixer.js ui
 ```
 
 How to contact the author?  
 Please email to `xliu234@buffalo.edu`
 
-All the mutation record will be saved in `.mutationslog` file, located in root directory.
+All the mutation record will be saved in `mutations.log` file, located in `lib/GUI/public` directory.
