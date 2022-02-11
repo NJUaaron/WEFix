@@ -66,7 +66,6 @@ FTFixer.before_cmd = async function (driver) {
 }
 
 FTFixer.before_cmd_cy = async function (cy) {
-    //var snippet_path = __dirname + '/lib/mutationObserver.js'
     var snippet = `StartObserver();function cookieSet(e){if("undefined"==typeof document)return;var t=(new Date).getTime(),o=JSON.stringify(e),r=new Date(Date.now()+8e3).toUTCString();cookieStr="ftFix"+t+"="+o+"; expires="+r,document.cookie=cookieStr}function StartObserver(){console.log("Start mutaion oberver");new MutationObserver((function(e,t){console.log(e);var o=[];for(let t in e){const r=e[t];let d=convertRecord(r);o.push(d),"childList"===r.type?console.log("A child node has been added or removed."):"attributes"===r.type?console.log("The "+r.attributeName+" attribute was modified."):"characterData"===r.type&&console.log("Character data was modified.")}cookieSet(o)})).observe(document,{attributes:!0,childList:!0,subtree:!0}),console.log("Mutation observer started")}function convertRecord(e){var t={};t.target=convertNode(e.target),t.addedNodes=[];var o=e.addedNodes;for(let e=0;e<o.length;e++)t.addedNodes.push(convertNode(o[e]));t.removedNodes=[];var r=e.removedNodes;for(let e=0;e<r.length;e++)t.removedNodes.push(convertNode(r[e]));return t.type=e.type,t.attributeName=e.attributeName,t.oldValue=e.oldValue,t}function convertNode(e){var t={};return t.nodeName=e.nodeName,t.className=e.className,t.id=e.id,t.childElementCount=e.childElementCount,t}`;
     //var snippet = `function cookieSet(e){if("undefined"==typeof document)return;var t="ftFix"+(new Date).getTime()+"="+JSON.stringify(e)+"; expires="+new Date(Date.now()+8e3).toUTCString();document.cookie=t}function StartObserver(){if("undefined"!=typeof observer_exist&&1==observer_exist)return;console.log("Start mutaion oberver");new MutationObserver((function(e,t){var o=[];for(let t in e){const r=e[t];let n=convertRecord(r);o.push(n),"childList"===r.type?console.log("A child node has been added or removed."):"attributes"===r.type?console.log("The "+r.attributeName+" attribute was modified."):"characterData"===r.type&&console.log("Character data was modified.")}cookieSet(o)})).observe(document,{attributes:!0,childList:!0,subtree:!0}),window.observer_exist=!0,console.log("Mutation observer started")}function convertRecord(e){var t={};t.target=convertNode(e.target),t.addedNodes=[];var o=e.addedNodes;for(let e=0;e<o.length;e++)t.addedNodes.push(convertNode(o[e]));t.removedNodes=[];var r=e.removedNodes;for(let e=0;e<r.length;e++)t.removedNodes.push(convertNode(r[e]));return t.type=e.type,t.attributeName=e.attributeName,t.oldValue=e.oldValue,t}function convertNode(e){var t={};return t.nodeName=e.nodeName,t.className=e.className,t.id=e.id,t.nodeType=e.nodeType,t.nodeValue=e.nodeValue,t.textContent=e.textContent,t.childElementCount=e.childElementCount,t}StartObserver();`;
     cy.window().then((win) => {
@@ -76,9 +75,9 @@ FTFixer.before_cmd_cy = async function (cy) {
 }
 
 FTFixer.after_cmd = async function (driver, filename, start_line, start_col, sentence) {
-    var timestamp = Date.now(); //miliseconds
     await FTFixer.waitFor(2000);
     var cookies = await driver.manage().getCookies();
+    var timestamp = Date.now() - 2000; //miliseconds
     var mutations = FTFixer.parseCookie(cookies);
     
     var record = {
@@ -97,10 +96,10 @@ FTFixer.after_cmd = async function (driver, filename, start_line, start_col, sen
 }
 
 FTFixer.after_cmd_cy = async function (cy, filename, start_line, start_col, sentence) {
-    var timestamp = Date.now();
     cy.wait(2000);
     cy.getCookies().then((cookies) => {
-        var mutations = FTFixer.parseCookie(cookies);     
+        var mutations = FTFixer.parseCookie(cookies);
+        var timestamp = Date.now() - 2000;     
         var record = {
             "time": timestamp,
             "filename": filename,
