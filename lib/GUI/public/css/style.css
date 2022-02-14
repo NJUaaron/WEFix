@@ -1,3 +1,22 @@
 body {
     background-color: #e4f3f3;
 }
+
+.small-font {
+    font-size: 0.7rem;
+}
+
+.accordion-item {
+    margin: 0.3rem;
+}
+
+.accordion-button {
+    padding-left: 20px;
+    padding-top: 6px;
+    padding-bottom: 5px;
+    font-size: 0.7rem;
+}
+
+.accordion-body {
+    padding: 10px;
+}
