@@ -5,12 +5,18 @@ This is a simple tool to automatically fix UI-based flaky test. To use this tool
 
 how to install?
 ``` shell
+# NPM
 $ npm install --save-dev @aaronxyliu/ftfixer
+# Yarn
+$ yarn add --dev @aaronxyliu/ftfixer
 ```
 
 how to update to newest version?
 ``` shell
+# NPM
 $ npm update @aaronxyliu/ftfixer
+# Yarn
+$ yarn upgrade @aaronxyliu/ftfixer
 ```
 
 how to use?
