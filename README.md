@@ -16,16 +16,17 @@ how to update to newest version?
 # NPM
 $ npm update @aaronxyliu/ftfixer
 # Yarn
-$ yarn upgrade @aaronxyliu/ftfixer
+$ yarn up @aaronxyliu/ftfixer
 ```
 
 how to use?
 ``` shell
-# help manual
-$ npx @aaronxyliu/ftfixer --help
-
-# open ui panel to show mutation record
-$ npx @aaronxyliu/ftfixer ui
+# NPM
+$ npx ftfixer --help
+$ npx ftfixer ui
+#Yarn
+$ yarn ftfixer --help
+$ yarn ftfixer ui
 ```
 
 
