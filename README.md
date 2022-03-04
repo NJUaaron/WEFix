@@ -14,17 +14,17 @@ $ yarn add --dev @aaronxyliu/ftfixer
 how to update to newest version?
 ``` shell
 # NPM
-$ npm update @aaronxyliu/ftfixer
+$ npm update ftfixer
 # Yarn
-$ yarn up @aaronxyliu/ftfixer
+$ yarn up ftfixer
 ```
 
 how to use?
 ``` shell
 # NPM
-$ npx ftfixer --help
-$ npx ftfixer ui
-#Yarn
+$ npx ftfixer --help    # User manual
+$ npx ftfixer ui        # Open UI panel on local server
+# Yarn
 $ yarn ftfixer --help
 $ yarn ftfixer ui
 ```

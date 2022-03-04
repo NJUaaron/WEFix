@@ -1,10 +1,10 @@
 const fs = require('fs');
 const { MUTATIONS_LOG_PATH, OBSERVER_FILE_PATH, DEFAULT_WAIT_TIME } = require('./lib/global')
 
-var FTFixer = {}
+var FTfixer = {}
 
 
-FTFixer.waitFor = async function (timeout = DEFAULT_WAIT_TIME) {
+FTfixer.waitFor = async function (timeout = DEFAULT_WAIT_TIME) {
     return new Promise(r => {
         setTimeout(() => {
             r();
@@ -12,7 +12,7 @@ FTFixer.waitFor = async function (timeout = DEFAULT_WAIT_TIME) {
     });
 }
 
-FTFixer.waitUntil = async function (conFunc, timeout = DEFAULT_WAIT_TIME, interval = 10) {    // conFunc: condition function(async)
+FTfixer.waitUntil = async function (conFunc, timeout = DEFAULT_WAIT_TIME, interval = 10) {    // conFunc: condition function(async)
     var timeoutFlag = false;
     setTimeout(() => timeoutFlag = true, timeout);
 
@@ -28,7 +28,7 @@ FTFixer.waitUntil = async function (conFunc, timeout = DEFAULT_WAIT_TIME, interv
     return false;
 }
 
-FTFixer.parseCookie = function (cookies) {
+FTfixer.parseCookie = function (cookies) {
     var mutations = []; //mutation array
 
     for (let i in cookies) {
@@ -56,7 +56,7 @@ FTFixer.parseCookie = function (cookies) {
 
 }
 
-FTFixer.before_cmd = async function (driver) {
+FTfixer.before_cmd = async function (driver) {
     var snippet = '';
     try {
         snippet = fs.readFileSync(OBSERVER_FILE_PATH, 'utf8');
@@ -69,7 +69,7 @@ FTFixer.before_cmd = async function (driver) {
     await driver.manage().deleteAllCookies();
 }
 
-FTFixer.before_cmd_cy = async function (cy) {
+FTfixer.before_cmd_cy = async function (cy) {
     cy.readFile(OBSERVER_FILE_PATH).then((code) => {
         cy.window().then((win) => {
             win.eval(code);
@@ -78,11 +78,11 @@ FTFixer.before_cmd_cy = async function (cy) {
     cy.clearCookies();
 }
 
-FTFixer.after_cmd = async function (driver, filename, start_line, start_col, sentence) {
-    await FTFixer.waitFor(DEFAULT_WAIT_TIME);
+FTfixer.after_cmd = async function (driver, filename, start_line, start_col, sentence) {
+    await FTfixer.waitFor(DEFAULT_WAIT_TIME);
     var cookies = await driver.manage().getCookies();
     var timestamp = Date.now() - DEFAULT_WAIT_TIME; //miliseconds
-    var mutations = FTFixer.parseCookie(cookies);
+    var mutations = FTfixer.parseCookie(cookies);
     
     var record = {
         "time": timestamp,
@@ -99,10 +99,10 @@ FTFixer.after_cmd = async function (driver, filename, start_line, start_col, sen
     })
 }
 
-FTFixer.after_cmd_cy = async function (cy, filename, start_line, start_col, sentence) {
+FTfixer.after_cmd_cy = async function (cy, filename, start_line, start_col, sentence) {
     cy.wait(DEFAULT_WAIT_TIME);
     cy.getCookies().then((cookies) => {
-        var mutations = FTFixer.parseCookie(cookies);
+        var mutations = FTfixer.parseCookie(cookies);
         var timestamp = Date.now() - DEFAULT_WAIT_TIME;     
         var record = {
             "time": timestamp,
@@ -123,4 +123,4 @@ FTFixer.after_cmd_cy = async function (cy, filename, start_line, start_col, sent
 
 
 
-module.exports = FTFixer;
+module.exports = FTfixer;
