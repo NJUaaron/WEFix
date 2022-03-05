@@ -16,7 +16,7 @@ how to update to newest version?
 # NPM
 $ npm update ftfixer
 # Yarn
-$ yarn up ftfixer
+$ yarn up @aaronxyliu/ftfixer
 ```
 
 how to use?
