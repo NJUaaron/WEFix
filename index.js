@@ -117,8 +117,8 @@ FTfixer.after_cmd_cy = async function (cy, filename, start_line, start_col, sent
             "mutations": mutations
         };
         // Append to log file
-        //var log_path = process.env.FT_LOG_PATH || MUTATIONS_LOG_PATH
-        var log_path = '/home/aaron/'
+        var log_path = process.env.FT_LOG_PATH || MUTATIONS_LOG_PATH
+        //var log_path = '/home/aaron/'
         if (log_path[log_path.length - 1] == '/' || log_path[log_path.length - 1] == '\\')
             log_path += 'mutations.log'
         cy.readFile(log_path).then((str) => {
