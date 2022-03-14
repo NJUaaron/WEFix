@@ -1,8 +1,5 @@
 const fs = require('fs');
 
-if(typeof a == 'undefined')
-    console.log('un');
-else
-console.log('de');
-
-window.a = true;
+MUTATIONS_LOG_PATH = 'jello'
+var log_path = process.env.FT_LOG_PATH || MUTATIONS_LOG_PATH
+console.log(log_path)
