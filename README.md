@@ -29,6 +29,10 @@ $ yarn ftfixer --help
 $ yarn ftfixer ui
 ```
 
+You can preset the log file path by setting environment variable.
+``` shell
+$ FT_LOG_PATH=<path/to/mutations.log>
+```
 
 ## For Developers
 How to deploy?
